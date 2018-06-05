@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.util.Log
@@ -96,8 +97,9 @@ class ProjectActivity : AppCompatActivity() {
         doc.appendChild(rootElement)
         val transformer : Transformer = TransformerFactory.newInstance().newTransformer()
         transformer.setOutputProperty(OutputKeys.INDENT,"yes")
+        val extPath = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString()
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount","2")
-        val path = "${this.filesDir}/XMLOUT"
+        val path = "${extPath}/XMLOUT"
         val outDir = File(path)
         outDir.mkdir()
         val file = File(outDir,"${inventoryName}_extra.xml")
